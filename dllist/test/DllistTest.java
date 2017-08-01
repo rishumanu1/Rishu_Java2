@@ -28,5 +28,15 @@ public class DllistTest {
     assertEquals("god", d.getItem());
     
     }
-    
+     @Test
+    public void deleteTestMid() {
+    Dllist d = new Dllist();
+    d.insert("word", Dllist.position.FIRST);
+    d.insert("by", Dllist.position.LAST);
+    d.setPosition(Dllist.position.LAST);
+    d.insert("god", Dllist.position.PREVIOUS);
+    d.insert("hi", Dllist.position.FOLLOWING);
+    d.delete();
+    d.setPosition(Dllist.position.FIRST);
+    assertEquals("god" v, d.getItem());
 }
