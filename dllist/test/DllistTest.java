@@ -38,5 +38,6 @@ public class DllistTest {
     d.insert("hi", Dllist.position.FOLLOWING);
     d.delete();
     d.setPosition(Dllist.position.FIRST);
-    assertEquals("god" v, d.getItem());
+    assertEquals("god" , d.getItem());
+}
 }
