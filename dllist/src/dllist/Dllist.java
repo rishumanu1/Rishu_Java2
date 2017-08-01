@@ -91,14 +91,14 @@ public class Dllist {
         if (current == first) {
             first = current.next;
             current = first;
+            first.prev = null;
             currentPosition = 0;
         }
         if (current == last) {
-            node t = current;
-            current = current.next;
-            current.prev = t.prev;
-            t.prev.next = current;
-            currentPosition++;
+            current = current.prev;
+            last=current;
+            current.next=null;
+            currentPosition--;
         } else {
             last = current.prev;
             current = last;
@@ -120,6 +120,8 @@ public class Dllist {
             case FIRST: {
                 if (first == null) {
                     first = n;
+                    last=n;
+                    current=n;
                 } else {
                     first.prev = n;
                     n.next = first;
@@ -129,7 +131,9 @@ public class Dllist {
             }
             case LAST: {
                 if (last == null) {
-                    last = n;
+                    first = n;
+                    last=n;
+                    current=n;
                 } else {
                     last.next = n;
                     n.prev = last;
@@ -161,7 +165,7 @@ public class Dllist {
                     current.prev = t;
                     t.next = current;
                     current.next = y;
-                    y.prev = current;
+                    y.prev = n;
                     currentPosition++;
                 }
                 break;
@@ -192,14 +196,17 @@ public class Dllist {
         Dllist x = new Dllist();
         x.insert("word", position.FIRST);
         x.insert("by", position.LAST);
+        
         x.setPosition(position.FIRST);
         x.insert("two", position.FOLLOWING);
         x.insert("hello", position.FOLLOWING);
+        x.traverse();
         x.setPosition(position.FOLLOWING);
-        x.isEmpty();
+        System.out.println(x.isEmpty());
         x.delete();
-        x.getPosition();
-        x.getItem();
+         x.traverse();
+        System.out.println(x.getPosition());
+       System.out.println(x.getItem());
 
     }
 }
