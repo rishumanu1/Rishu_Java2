@@ -4,16 +4,16 @@ public class Sortingtimes {
 
     public static void main(String[] args) {
 
-          int[] a = new int[10];
-        for (int i =0; i<10; i++) {
-            a[i]=(int) (Math.random()*100);
+         int[] a = new int[50];
+        for (int i =0; i<50; i++) {
+            a[i]=(int) (Math.random()*1000);
         }
-        int[] b =new int[10];
-        for (int i =0; i<10; i++) {
+        int[] b =new int[50];
+        for (int i =0; i<50; i++) {
             b[i]=a[i];
         }
-         int[] c =new int[10];
-        for (int i =0; i<10; i++) {
+         int[] c =new int[50];
+        for (int i =0; i<50; i++) {
             c[i]=a[i];
         }
         long startTime = System.nanoTime(); 
@@ -22,12 +22,13 @@ public class Sortingtimes {
         startTime = System.nanoTime(); 
         selectionSort(b);
         long selectionSortTime = System.nanoTime() - startTime;
-        startTime = System.nanoTime(); 
+        
          for(int i = 0; i < c.length; i++)
         {
           System.out.print(c[i] + " ");
         }
          System.out.println();
+         startTime = System.nanoTime(); 
         insertionSort(c);
         long insertionSortTime = System.nanoTime() - startTime;
         System.out.println("Bubble Sort time: "+bubbleSortTime +", Selection Sort time: "+selectionSortTime+", Insertion Sort time: "+insertionSortTime);
@@ -35,6 +36,38 @@ public class Sortingtimes {
         {
           System.out.print(c[i] + " ");
         }
+          String[] x = {"ball", "dog", "apple", "cat", "ear", "diamond"};
+          insertionSort(x);
+         
+        String[] y =new String[6];
+        for (int i =0; i<6; i++) {
+            y[i]=x[i];
+        }
+         String[] z =new String[6];
+        for (int i =0; i<6; i++) {
+            z[i]=x[i];
+        }
+         startTime = System.nanoTime(); 
+        bubbleSort(x);
+        long bubbleSortStringTime = System.nanoTime() - startTime;
+        startTime = System.nanoTime(); 
+        selectionSort(y);
+        long selectionSortStringTime = System.nanoTime() - startTime;
+        
+         for(int i = 0; i < x.length; i++)
+        {
+          System.out.print(x[i] + " ");
+        }
+         System.out.println();
+         startTime = System.nanoTime(); 
+        insertionSort(z);
+        long insertionSortStringTime = System.nanoTime() - startTime;
+        System.out.println("Bubble Sort time: "+bubbleSortStringTime +", Selection Sort time: "+selectionSortStringTime+", Insertion Sort time: "+insertionSortStringTime);
+        for(int i = 0; i < z.length; i++)
+        {
+          System.out.print(z[i] + " ");
+        }
+        
          
     }
 
@@ -126,14 +159,14 @@ public class Sortingtimes {
     {
         for (int i = 1; i < arr.length; i++)
         {
-           
-             while (i > 0 && arr[i] < arr[i-1])
+           int j=i;
+             while (j > 1 && arr[j] < arr[j-1])
              {
-                 
-                     int temp = arr[i];
-                     arr[i] = arr[i-1];
-                     arr[i-1] = temp;
-                      i--;
+                 swapNumbers(j,j-1, arr);
+                     int temp = arr[j];
+                     arr[j] = arr[j-1];
+                     arr[j-1] = temp;
+                      j--;
                      
                  }
              }
@@ -141,21 +174,18 @@ public class Sortingtimes {
             
     public static void insertionSort(String[] arr)
     {
-        for (int i = 0; i < arr.length; i++)
+         for (int i = 1; i < arr.length; i++)
         {
-            int j = 0;
-            while (j < i)
-            {
-                int x = arr[i].compareTo(arr[j]);
-                if(x < 0)
-                {
-                    String largeWord = arr[j];
-                    arr[j] = arr[i];
-                    arr[i] = largeWord;
-                    break;
-                }
-                j++;
-            }
+           int j=i;
+             while (j > 1 && arr[j].compareTo(arr[j-1])< 0)
+             {
+                    String temp = arr[j];
+                     arr[j] = arr[j-1];
+                     arr[j-1] = temp;
+                      j--;
+                     
+                 }
+             }
         }
             }
-}
+
