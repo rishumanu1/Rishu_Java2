@@ -14,10 +14,15 @@ import java.util.Scanner;
 public class gamePlay {
     public static void main(String[] args)
     {
-        game g = new game();
+         game g = new game();
          Scanner in = new Scanner(System.in);
          g.begin();
-         String p = "";
+         String p = in.nextLine();
+         while (p != "q")
+         {
+             g.change(p);
+             p = in.nextLine();
+         }
          
 }
 }

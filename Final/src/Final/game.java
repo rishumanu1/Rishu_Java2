@@ -38,12 +38,12 @@ public class game {
                 room x = new room();
                 if (!currentLine.equals("")) {
                 if (currentLine.charAt(0) == 'r') {
-                    x.name = currentLine.substring(1, currentLine.length());
+                    x.name = currentLine.substring(2, currentLine.length());
                     x.description = "";
                     currentLine = reader.readLine();
                 }
                 while (currentLine.charAt(0) == 'd') {
-                    x.description = x.description.concat(currentLine);
+                    x.description = x.description.concat(currentLine.substring(2, currentLine.length()) + " ");
                     currentLine = reader.readLine();
                 }
                 int i = 0;
@@ -109,7 +109,7 @@ public class game {
     }
 
     public void print(room d) {
-        System.out.println(d.name);
+        
         System.out.println(d.description);
         int i = 0;
         while (d.options[i] != null) {
@@ -156,70 +156,70 @@ public class game {
     }
 
     public void change(String x) {
-        if (x == "a") {
-            room z = search(s.peek().roomNext[0], 0, 11);
+        if (x.equals("a")) {
+            room z = search(s.peek().roomNext[0], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "b") {
-            room z = search(s.peek().roomNext[1], 0, 11);
+        } else if (x.equals("b")) {
+            room z = search(s.peek().roomNext[1], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "c") {
-            room z = search(s.peek().roomNext[2], 0, 11);
+        } else if (x.equals("c")) {
+            room z = search(s.peek().roomNext[2], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "d") {
-            room z = search(s.peek().roomNext[3], 0, 11);
+        } else if (x.equals("d")) {
+            room z = search(s.peek().roomNext[3], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "e") {
-            room z = search(s.peek().roomNext[4], 0, 11);
+        } else if (x.equals("e")) {
+            room z = search(s.peek().roomNext[4], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "f") {
-            room z = search(s.peek().roomNext[5], 0, 11);
+        } else if (x.equals("f")) {
+            room z = search(s.peek().roomNext[5], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "g") {
-            room z = search(s.peek().roomNext[6], 0, 11);
+        } else if (x.equals("g")) {
+            room z = search(s.peek().roomNext[6], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "h") {
-            room z = search(s.peek().roomNext[7], 0, 11);
+        } else if (x.equals("h")) {
+            room z = search(s.peek().roomNext[7], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "i") {
-            room z = search(s.peek().roomNext[8], 0, 11);
+        } else if (x.equals("i")) {
+            room z = search(s.peek().roomNext[8], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "j") {
-            room z = search(s.peek().roomNext[9], 0, 11);
+        } else if (x.equals("j")) {
+            room z = search(s.peek().roomNext[9], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "k") {
-            room z = search(s.peek().roomNext[10], 0, 11);
+        } else if (x.equals("k")) {
+            room z = search(s.peek().roomNext[10], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "l") {
-            room z = search(s.peek().roomNext[11], 0, 11);
+        } else if (x.equals("l")) {
+            room z = search(s.peek().roomNext[11], 0, r.size());
             s.push(z);
             print(z);
-        } else if (x == "y") {
+        } else if (x.equals("y")) {
             for (int i = 0; i < r.size(); i++) {
                 print(r.get(i));
             }
             print(s.peek());
-        } else if (x == "z") {
+        } else if (x.equals("z")) {
             s.pop();
             print(s.peek());
-        } else if (x == "r") {
+        } else if (x.equals("r")) {
             Stack l = new Stack();
             s = l;
             begin();
-        } else {
+        } /*else {
             System.out.print("Not a Valid Option");
             print(s.peek());
-        }
+        }*/
 
     }
 
