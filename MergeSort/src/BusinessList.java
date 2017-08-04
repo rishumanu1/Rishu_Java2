@@ -8,14 +8,15 @@
  *
  * @author Education Unlimited
  */
-public class BussinessList {
+import java.io.*;
+public class BusinessList {
     private int numberOfBusinesses;
     private BusinessRecord[] b;
     private int searches;
     private int failed;
     
     public BusinessList(int num){
-         BussinessRecord[] b = new By[100];
+         BusinessRecord[] b = new BusinessRecord[100];
           
             int index=0;
         String FILENAME = "hello.txt";
@@ -24,7 +25,8 @@ public class BussinessList {
             String currentLine = reader.readLine();
         
             while (currentLine != null) {
-		r[index]=currentLine;
+                BusinessRecord n = new BusinessRecord(currentLine, "696969669");
+		b[index] = n;
                 index++;
                 currentLine = reader.readLine();
             }
