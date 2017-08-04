@@ -1,9 +1,8 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Education Unlimited
@@ -16,60 +15,54 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class game {
-    
-    private class room
-    {
-        String[] options = new String [12];
+
+    private class room {
+
+        String[] options = new String[12];
         String name;
         String description;
-        String[] roomNext = new String [12];
-        
-       
-    
-    }
-  private ArrayList<room> r;
-  
-  public game()
-  {
-     
-       String FILENAME = "hello.txt";
-	try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
-           
-            String currentLine = reader.readLine();
-           
-          while (currentLine != null)
-          {
-             room x = new room();
-            if (currentLine.charAt(0) == 'r')
-            {  
-                x.name = currentLine.substring(1,currentLine.length());
-                x.description = "";
-                currentLine = reader.readLine();
-            }
-            while(currentLine.charAt(0) == 'd')
-            {
-                x.description = x.description.concat(currentLine);
-                currentLine = reader.readLine();
-            }
-            int i = 0;
-            while (currentLine.charAt(0) == 'o')
-            {
-                 x.options[i] = currentLine;
-                 currentLine = reader.readLine();
-                x.roomNext[i] = currentLine;
-                i++;
-                currentLine = reader.readLine();
-                 }
-            r.add(x);
-          }
-        }
+        String[] roomNext = new String[12];
 
-   catch (IOException e) {
+    }
+    private ArrayList<room> r = new ArrayList();
+    private Stack s = new Stack();
+
+    public game() {
+
+        String FILENAME = "game.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
+
+            String currentLine = reader.readLine();
+
+            while (currentLine != null) {
+                room x = new room();
+                if (!currentLine.equals("")) {
+                if (currentLine.charAt(0) == 'r') {
+                    x.name = currentLine.substring(1, currentLine.length());
+                    x.description = "";
+                    currentLine = reader.readLine();
+                }
+                while (currentLine.charAt(0) == 'd') {
+                    x.description = x.description.concat(currentLine);
+                    currentLine = reader.readLine();
+                }
+                int i = 0;
+                while (currentLine !=null && currentLine.charAt(0) == 'o') {
+                    x.options[i] = currentLine.substring(2, currentLine.length());
+                    currentLine = reader.readLine();
+                    x.roomNext[i] = currentLine.substring(2, currentLine.length());
+                    i++;
+                    currentLine = reader.readLine();
+                }
+                r.add(x);
+                }
+            }
+        } catch (IOException e) {
             e.printStackTrace();
-	}
-  }
-  
-  public void bubbleSort() {
+        }
+    }
+
+    public void bubbleSort() {
         int n = r.size();
         int k;
         for (int m = n; m >= 0; m--) {
@@ -84,6 +77,11 @@ public class game {
         }
     }
 
+    public void begin() {
+        s.push(r.get(0));
+        print(r.get(0));
+    }
+
     private static void swapRooms(int i, int j, ArrayList<room> r) {
 
         room temp;
@@ -93,13 +91,172 @@ public class game {
         r.remove(i);
         r.add(i, temp);
     }
-    
-    public room search()
-    {
-        int i = 0;
-        while (1 == 0){
-            
+
+    public room search(String d, int upperbound, int lowerbound) {
+        if (d.compareTo(r.get((upperbound + lowerbound) / 2).name) == 0) {
+            return r.get((upperbound - lowerbound) / 2);
+        } else {
+            if (d.compareTo(r.get((upperbound + lowerbound) / 2).name) < 0) {
+                upperbound = (upperbound + lowerbound) / 2;
+
+            }
+            if (d.compareTo(r.get((upperbound + lowerbound) / 2).name) > 0) {
+                lowerbound = (upperbound + lowerbound) / 2;
+
+            }
+            return search(d, upperbound, lowerbound);
         }
     }
-}
 
+    public void print(room d) {
+        System.out.println(d.name);
+        System.out.println(d.description);
+        int i = 0;
+        while (d.options[i] != null) {
+            if (i == 0) {
+                System.out.println("a: " + d.options[i]);
+            }
+
+            if (i == 1) {
+                System.out.println("b: " + d.options[i]);
+            }
+            if (i == 2) {
+                System.out.println("c: " + d.options[i]);
+            }
+            if (i == 3) {
+                System.out.println("d: " + d.options[i]);
+            }
+            if (i == 4) {
+                System.out.println("e: " + d.options[i]);
+            }
+            if (i == 5) {
+                System.out.println("f: " + d.options[i]);
+            }
+            if (i == 6) {
+                System.out.println("g: " + d.options[i]);
+            }
+            if (i == 7) {
+                System.out.println("h: " + d.options[i]);
+            }
+            if (i == 8) {
+                System.out.println("i: " + d.options[i]);
+            }
+            if (i == 9) {
+                System.out.println("j: " + d.options[i]);
+            }
+            if (i == 10) {
+                System.out.println("k: " + d.options[i]);
+            }
+            if (i == 11) {
+                System.out.println("l: " + d.options[i]);
+            }
+            i++;
+
+        }
+    }
+
+    public void change(String x) {
+        if (x == "a") {
+            room z = search(s.peek().roomNext[0], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "b") {
+            room z = search(s.peek().roomNext[1], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "c") {
+            room z = search(s.peek().roomNext[2], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "d") {
+            room z = search(s.peek().roomNext[3], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "e") {
+            room z = search(s.peek().roomNext[4], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "f") {
+            room z = search(s.peek().roomNext[5], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "g") {
+            room z = search(s.peek().roomNext[6], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "h") {
+            room z = search(s.peek().roomNext[7], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "i") {
+            room z = search(s.peek().roomNext[8], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "j") {
+            room z = search(s.peek().roomNext[9], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "k") {
+            room z = search(s.peek().roomNext[10], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "l") {
+            room z = search(s.peek().roomNext[11], 0, 11);
+            s.push(z);
+            print(z);
+        } else if (x == "y") {
+            for (int i = 0; i < r.size(); i++) {
+                print(r.get(i));
+            }
+            print(s.peek());
+        } else if (x == "z") {
+            s.pop();
+            print(s.peek());
+        } else if (x == "r") {
+            Stack l = new Stack();
+            s = l;
+            begin();
+        } else {
+            System.out.print("Not a Valid Option");
+            print(s.peek());
+        }
+
+    }
+
+    class Stack {
+
+        private room[] stack;
+        private int size;
+
+        // Constructor for stack
+        Stack() {
+            stack = new room[100];
+            size = 0;
+        }
+
+        public void push(room d) {
+            //adds the double d onto the stack, increments the size
+            stack[size++] = d;
+
+        }
+
+        public room pop() {
+            room x = stack[size - 1];
+            stack[size - 1] = null;
+            size--;
+            return x;
+        }
+
+        public room peek() {
+            //returns the top number of the stack without modifying it
+            return stack[size - 1];
+        }
+
+        public int size() {
+            //returns the current size of the stack
+            return size;
+        }
+
+    }
+
+}
