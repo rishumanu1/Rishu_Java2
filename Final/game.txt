@@ -1,13 +1,24 @@
-r room1
-d This is room one.
-d You are awake.
+r Home
+d You're chilling at home and there's a party next door.
+d But you're also tired.
 o Go to sleep.
-t room2
-o Stay awake.
-t room1
-r room2
-d You are sleeping.
-o Stay asleep.
-t room2
+t Bedroom
+o Go to the Party.
+t Party
+r Bedroom
+d You are sleeping but noise from the party wakes you up.
 o Wake up.
-t room1
+t Home
+r Party
+d You're at the party and there's a pool.
+d But you're sick.
+o Go into the pool
+t Pool
+o Go home because you can't enjoy the party
+t Home
+r Pool
+d The pool is really cold and you feel sick.
+o Go home and sleep
+t Bedroom
+o Just go home and don't sleep
+t Home
